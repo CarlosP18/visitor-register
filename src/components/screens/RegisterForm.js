@@ -8,7 +8,7 @@ import 'moment/locale/es-mx';
 import 'animate.css';
 import { useForm } from '../../hooks/useForm';
 import { useDispatch } from 'react-redux';
-import { finishRegistration, registerStartPost } from '../../actions/actions';
+import { registerStartPost } from '../../actions/actions';
 import { useHistory } from 'react-router';
 
 export const RegisterForm = () => {
@@ -48,10 +48,10 @@ export const RegisterForm = () => {
         endTime,
     } = inputValues;
 
-    const handleRegister = async e => {
+    const handleRegister = e => {
         e.preventDefault();
         dispatch(
-            await registerStartPost(
+            registerStartPost(
                 id,
                 nombre,
                 apellido,
@@ -64,11 +64,10 @@ export const RegisterForm = () => {
             )
         );
         reset();
-        dispatch(finishRegistration());
         history.push('/');
     };
     const isFormValid = () => {
-        if (id.length < 5) {
+        if (id?.length < 5) {
             return false;
         } else if (nombre?.length === 0) {
             return false;
@@ -211,7 +210,6 @@ export const RegisterForm = () => {
                         type='text'
                         className='h-12 w-full text-center mt-3 focus:ring-0 rounded-md border outline-none  border-gray-400'
                         name='date'
-                        disabled
                         value={registerDate}
                         onChange={handleInputChange}
                     />

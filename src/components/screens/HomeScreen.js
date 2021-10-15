@@ -9,7 +9,6 @@ import {
     startRegistration,
 } from '../../actions/actions';
 import { useHistory } from 'react-router';
-import ErrMsg from '../ErrorMsg';
 
 export const HomeScreen = () => {
     const [formValues, handleInputChange, reset] = useForm({
@@ -24,6 +23,7 @@ export const HomeScreen = () => {
     const handleStartRegister = async e => {
         e.preventDefault();
         dispatch(startRegistration(cedula));
+        localStorage.setItem('userData', JSON.stringify(cedula));
         const registerData = await dispatch(getPrevData());
         const prevData = registerData.find(x => x.cedula === cedula);
         if (prevData) {

@@ -47,6 +47,8 @@ export const registerStartPost = (
 
             const body = await resp.json();
 
+            dispatch(finishRegistration());
+
             console.log(body);
         } catch (error) {
             console.log(error);
@@ -71,7 +73,7 @@ export const fillFormiWithPrevData = (
     },
 });
 
-export const finishRegistration = () => {
+const finishRegistration = () => {
     Swal.fire(
         'Regitro Exitoso',
         'Visitante fue regitrado correctamente',
